@@ -1,0 +1,152 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} Ajouter une équipe {% endblock %}
+{% block body %}
+
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('equipe_new') }}" enctype="multipart/form-data"
+                          class="panel panel-default">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <div class="alert-danger">{{ form_errors(form.file) }}</div>
+                                <label>Logo</label>
+
+                                <div class="input-group">
+                                    <div class="input-group image-preview">
+                                        <input type="text" class="form-control image-preview-filename"
+                                               disabled="disabled">
+                                        <!-- don't give a name === doesn't send on POST/GET -->
+                                            <span class="input-group-btn">
+                                                <!-- image-preview-clear button -->
+                                                <button type="button" class="btn btn-default image-preview-clear"
+                                                        style="display:none;">
+                                                    <span class="glyphicon glyphicon-remove"></span> Clear
+                                                </button>
+                                                <!-- image-preview-input -->
+                                                <div class="btn btn-default image-preview-input">
+                                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                                    <span class="image-preview-input-title">Browse</span>
+                                                    {{ form_widget(form.file) }}<!-- rename it -->
+                                                </div>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="alert-danger">{{ form_errors(form.file2) }}</div>
+                                <label>Logo</label>
+
+                                <div class="input-group">
+                                    <div class="input-group image-preview">
+                                        <input type="text" class="form-control image-preview-filename"
+                                               disabled="disabled">
+                                        <!-- don't give a name === doesn't send on POST/GET -->
+                                            <span class="input-group-btn">
+                                                <!-- image-preview-clear button -->
+                                                <button type="button" class="btn btn-default image-preview-clear"
+                                                        style="display:none;">
+                                                    <span class="glyphicon glyphicon-remove"></span> Clear
+                                                </button>
+                                                <!-- image-preview-input -->
+                                                <div class="btn btn-default image-preview-input">
+                                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                                    <span class="image-preview-input-title">Browse</span>
+                                                    {{ form_widget(form.file2) }}<!-- rename it -->
+                                                </div>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.libelle) }}</div>
+                                <label>Libellé</label>
+                                {{ form_widget(form.libelle, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.nbrjoueur) }}</div>
+                                <label>Nombre des joueurs</label>
+                                {{ form_widget(form.nbrjoueur, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.mail) }}</div>
+                                <label>Email</label>
+                                {{ form_widget(form.mail, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.adresse) }}</div>
+                                <label>Adresse</label>
+                                {{ form_widget(form.adresse, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.pays) }}</div>
+                                <label>Pays</label>
+                                {{ form_widget(form.pays, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.ville) }}</div>
+                                <label>Ville</label>
+                                {{ form_widget(form.ville, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.website) }}</div>
+                                <label>Site Web</label>
+                                {{ form_widget(form.website, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.tel) }}</div>
+                                <label>Numéro de téléphone</label>
+                                {{ form_widget(form.tel, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                        </div>
+
+                        {{ form_widget(form._token) }}
+                        <div class="col-md-12"><input type="submit" value="Enregistrer" class="btn btn-primary"/></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('bundles/jsapp/selectville.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            //tel masque
+            $('#app_adminbundle_user_numerotel').inputmask("99/999/999");
+
+
+            var readURL = function (input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.profile-pic').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+            $(".file-upload").on('change', function () {
+                readURL(this);
+            });
+
+            $(".upload-button").on('click', function () {
+                $(".file-upload").click();
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+poule_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Poule:index" }
+    methods:  GET
+
+poule_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Poule:show" }
+    methods:  GET
+
+poule_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Poule:new" }
+    methods:  [GET, POST]
+
+poule_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Poule:edit" }
+    methods:  [GET, POST]
+
+poule_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Poule:delete" }
+
+generate_match:
+    path: /{id}/generatematch
+    defaults: { _controller: "AppAdminBundle:Poule:generatematch" }
+
+listmatch_poule:
+    path:  /{id}/listmatchpoule
+    defaults: { _controller: "AppAdminBundle:Poule:listmatchpoule" }
+    

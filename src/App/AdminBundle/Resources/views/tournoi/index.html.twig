@@ -1,0 +1,67 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} liste des tournois {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('tournoi_new') }}">Ajouter un tournoi</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Logo</th>
+                            <th>statut</th>
+                            <th>Date début</th>
+                            <th>Date fin </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for tournoi in tournois %}
+                            <tr class="center-texttable">
+                                <td>{{ tournoi.titre }}</td>
+                                <td>
+                                    {% if tournoi.logo == null %}
+                                        <img src="{{ asset('uploads/logo/'~tournoi.logo) }}" style="max-width: 50px;" class="img-circle"></td>
+                                    {% else %} 
+                            <img src="{{ asset('uploads/logo/'~tournoi.logo) }}" style="max-width: 50px;" class="img-circle"></td>
+
+                        {% endif %}
+                        <th>{{ tournoi.statut }}</th>
+                        <td>{{ tournoi.datedebut }}</td>
+                        <td>{{ tournoi.datefin}} </td>
+                        <td>
+                            <span class="tooltip-area">
+                                <a href="{{ path('tournoi_delete', { 'id': tournoi.id }) }}" class="btn btn-default btn-sm" title="Delete" onclick="return confirm('voulez vous supprimer?')"><i class="fa fa-trash-o"></i></a>
+                                <a href="{{ path('tournoi_edit', { 'id': tournoi.id }) }}" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                <a href="{{ path('tournoi_show', { 'id': tournoi.id}) }}" class="btn btn-default btn-sm" title="voir" ><i class="fa fa-list"></i></a>
+                            </span>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+    <script>
+        jQuery(document).ready(function () {
+            // Call dataTable in this page only
+            $('#table-example').dataTable();
+
+        });
+    </script>
+
+{% endblock %}

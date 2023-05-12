@@ -1,0 +1,75 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Liste des utilisateurs {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('user_new') }}">Ajouter un utilisateur</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                    <tr>
+                  
+                        <th class="text-center">Nom d'utilisateur</th>
+                        <th class="text-center">Email</th>
+                        <th class="text-center">Rôle</th>
+                        <th class="text-center">Statut</th>
+                        <th class="text-center">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody align="center">
+                    {% for user in users %}
+                        <tr>
+                            
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{% if  user.roles|join == 'ROLE_SUPER_ADMINROLE_USER'   %}
+                                    {{ 'super admin' }}
+                                {% else %}
+                                    {{ 'admin' }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.enabled == 1 %}
+                                    <span class="label label-success"> activate</span>
+                                {% else %}
+                                    <span class="label label-danger">
+                                                desactiver
+                                            </span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                 <span class="tooltip-area">
+                                    <a href="{{ path('user_delete', { 'id': user.id }) }}" class="btn btn-default btn-sm" title="Delete" onclick="return confirm('voulez vous supprimer?')"><i class="fa fa-trash-o"></i></a>
+                                    <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                    </span>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+                    {% block javascript %}
+
+
+                        <script>
+                            jQuery(document).ready(function () {
+
+                                // Call dataTable in this page only
+                                $('#table-example').dataTable();
+                                
+                            });
+                        </script>
+
+                    {% endblock %}

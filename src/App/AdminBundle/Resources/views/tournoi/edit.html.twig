@@ -1,0 +1,73 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} Modifier un tournoi{% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('tournoi_edit',{'id':tournoi.id}) }}"
+                          enctype="multipart/form-data" class="panel panel-default">
+ <div class="col-md-12">
+
+                            <div class="col-md-6">
+
+
+                                <div class="form-group">
+
+                                    <div class="alert-danger">{{ form_errors(form.file) }}</div>
+                                    <label>Logo</label>
+
+                                   
+                                                    {{ form_widget(form.file) }}<!-- rename it -->
+                                                
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.titre) }}</div>
+                                    <label>Titre</label>
+                                    {{ form_widget(form.titre, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                               
+
+
+                            </div>
+                            <div class="col-md-6">
+                               
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.datedebut) }}</div>
+                                    <label>Date début</label>
+                                    {{ form_widget(form.datedebut, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.datefin) }}</div>
+                                    <label>Date fin</label>
+                                    {{ form_widget(form.datefin, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                           
+                            {{form_widget(form._token)}}
+                            <div class="col-md-12"><input type="submit" value="Enregistrer" class="btn btn-primary" /></div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/chosen/chosen.css') }}"/>
+    <script type="text/javascript" src="{{ asset('bundles/chosen/chosen.jquery.min.js') }}"></script>
+    <script>
+        (function ($) {
+            $('select').chosen();
+        })(jQuery);
+
+        jQuery(document).ready(function () {
+            $('#tournoi_datedebut').datepicker({dateFormat: 'yy-mm-dd'});
+            $('#tournoi_datefin').datepicker({dateFormat: 'yy-mm-dd'});
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+joueur_index:
+    path:     /
+    defaults: { _controller: "AppUserBundle:Joueur:index" }
+    methods:  GET
+
+joueur_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppUserBundle:Joueur:show" }
+    methods:  GET
+
+joueur_new:
+    path:     /new
+    defaults: { _controller: "AppUserBundle:Joueur:new" }
+    methods:  [GET, POST]
+
+joueur_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppUserBundle:Joueur:edit" }
+    methods:  [GET, POST]
+
+joueur_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppUserBundle:Joueur:delete" }
+

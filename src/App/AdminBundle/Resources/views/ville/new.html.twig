@@ -1,0 +1,47 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('ville_new') }}"  enctype="multipart/form-data" class="panel panel-default">
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.nom) }}</div>
+                                    <label>Libellé</label>
+                                    {{ form_widget(form.nom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.pays_id) }}</div>
+                                    <label>Pays</label>
+                                    {{ form_widget(form.pays_id, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+
+                            </div>
+                            {{form_widget(form._token)}}
+                            <div class="col-md-12"><input type="submit" value="Enregister" class="btn btn-primary" /></div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{asset('bundles/chosen/chosen.css')}}" />
+    <script type="text/javascript" src="{{asset('bundles/chosen/chosen.jquery.min.js')}}"></script>
+    <script>
+        (function ($) {
+            $('select').chosen();
+        })(jQuery);
+    </script>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('poule_new') }}">Ajouter une poule</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Libellé</th>
+                            <th>Reultat</th>
+                            <th>Matchs gagnés</th>
+                            <th>Matchs perdus</th>
+
+                        </tr>
+                    </thead>
+                    <tbody align="center">
+                        {% for e in classment %}
+                            <tr>
+                                <td>{{ e.equipe }}</td>
+                                <td>{{e.result}}</td>
+                                <td>{{e.wons}}</td>
+                                <td>{{e.lost}}</td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+    <script>
+        jQuery(document).ready(function () {
+            // Call dataTable in this page only
+            $('#table-example').dataTable();
+
+        });
+    </script>
+
+{% endblock %}
+

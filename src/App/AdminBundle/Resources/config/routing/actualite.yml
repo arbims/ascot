@@ -1,0 +1,23 @@
+actualite_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Actualite:index" }
+    methods:  GET
+
+actualite_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Actualite:show" }
+    methods:  GET
+
+actualite_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Actualite:new" }
+    methods:  [GET, POST]
+
+actualite_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Actualite:edit" }
+    methods:  [GET, POST]
+
+actualite_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Actualite:delete" }

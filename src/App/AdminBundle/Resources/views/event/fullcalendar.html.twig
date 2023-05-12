@@ -1,0 +1,155 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+
+
+{% block body %}
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs" data-provide="tabdrop">
+                <li><a href="#" class="change" data-change="prev"><i class="fa fa-chevron-left"></i></a></li>
+                <li><a href="#" class="change" data-change="next"><i class="fa fa-chevron-right"></i></a></li>
+                <li class="active"><a href="#" data-view="month" data-toggle="tab" class="change-view">Month</a></li>
+                <li><a href="#" data-view="agendaWeek" data-toggle="tab" class="change-view">Week</a></li>
+                <li><a href="#" data-view="agendaDay" data-toggle="tab" class="change-view">Day</a></li>
+                <li><a href="#" class="change-today">Today</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="row">
+
+                    <div class="col-lg-12" >
+                        <div id="calendar"></div>
+                    </div>
+                    <!-- //content > row > col-lg-8 -->
+
+
+                </div>
+                <!-- //content > row-->
+            </div>
+            <!-- //tab-content -->
+        </div>
+        <!-- //tabbable -->
+
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('bundles/assets/plugins/fullcalendar/fullcalendar.js') }}"></script>
+    <link href="{{ asset('bundles/assets/plugins/fullcalendar/fullcalendar.css') }}" rel="stylesheet" />
+    <script>
+        $(document).ready(function() {
+
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            events = {{ events|raw }};
+
+            $("#addEvent").submit(function(event){
+                event.preventDefault();
+                if($("#event_title").val()){
+                    var events=$('<span class="external-event  label" data-color="'+$("#color_select").val()+'">'+$("#event_title").val() +'</span>');
+                    events.css({'background-color': $("#color_select").val() || "#CCC" , 'margin-right': "3px"});
+                    $("#external-events").append(events);
+                    $("#external-events span.external-event").draggable({
+                        zIndex: 999,
+                        revert: true,
+                        revertDuration: 0 ,
+                        drag: function() { $("#slide-trash").addClass("active") },
+                        stop: function() { $("#slide-trash").removeClass("active") }
+                    });
+                    $(this)[0].reset();
+                    $('#md-add-event').modal('hide');
+                }else{
+                    $.notific8('Please enter <strong>event  title</strong> ',{ life:5000, theme:"danger" ,heading:"ERROR :);" });
+                    $("#event_title").focus();
+                }
+            });
+            $('#external-events span.external-event').draggable({
+                zIndex: 999,
+                revert: true,
+                revertDuration: 0 ,
+                drag: function() { $("#slide-trash").addClass("active") },
+                stop: function() { $("#slide-trash").removeClass("active") }
+            });
+
+            $( "#slide-trash" ).droppable({
+                accept: "#external-events span.external-event , .fc-event",
+                hoverClass: "active-hover",
+                drop: function( event, ui ) {
+                    ui.draggable.remove();
+                    $(this).removeClass( "active" );
+                }
+            });
+            var isElemOverDiv = function(draggedItem, dropArea) {
+                // Prep coords for our two elements
+                var a = $(draggedItem).offset;
+                a.right = $(draggedItem).outerWidth + a.left;
+                a.bottom = $(draggedItem).outerHeight + a.top;
+
+                var b = $(dropArea).offset;
+                a.right = $(dropArea).outerWidth + b.left;
+                a.bottom = $(dropArea).outerHeight + b.top;
+
+                // Compare
+                if (a.left >= b.left
+                        && a.top >= b.top
+                        && a.right <= b.right
+                        && a.bottom <= b.bottom) { return true; }
+                return false;
+            }
+            $('#calendar').fullCalendar({
+                /*			    eventClick: function(calEvent, jsEvent, view) {
+
+                 alert('Event: ' + calEvent._id);
+                 alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                 alert('View: ' + view.name);
+                 $(this).fullCalendar('removeEvents',calEvent._id);
+                 // change the border color just for fun
+                 //  $(this).css('border-color', 'red');
+
+                 },*/
+                eventDragStop: function(event, jsEvent, ui, view) {
+                    var x = isElemOverDiv(ui, $('#slide-trash'));
+                    alert(x);
+                    if (x) {
+                        alert("delete");
+                        $('#calendar').fullCalendar('removeEvents', event.id);
+                    }
+                },
+                header: {
+                    left: 'title',
+                    center: '',
+                    right: ''
+                },
+                editable: true,
+                droppable: true,
+                events: events,
+                drop: function(date, allDay) {
+                    var  copiedEventObject = {
+                        title: $(this).text(),
+                        start: date,
+                        allDay: allDay,
+                        color: $(this).css('background-color')
+                    };
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+                    $(this).remove();
+                }
+            });
+            $(".change-view").click(function(){
+                var data=$(this).data();
+                $('#calendar').fullCalendar( 'changeView', data.view );
+            });
+            $(".change-today").click(function(){
+                $('#calendar').fullCalendar( 'today' );
+            });
+            $(".change").click(function(){
+                var data=$(this).data();
+                $('#calendar').fullCalendar( data.change );
+            });
+
+        });
+
+    </script>
+
+{% endblock %}

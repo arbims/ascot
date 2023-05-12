@@ -1,0 +1,24 @@
+court_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Court:index" }
+    methods:  GET
+
+court_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Court:show" }
+    methods:  GET
+
+court_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Court:new" }
+    methods:  [GET, POST]
+
+court_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Court:edit" }
+    methods:  [GET, POST]
+
+court_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Court:delete" }
+

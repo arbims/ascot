@@ -1,0 +1,77 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} liste des poules {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('poule_new') }}">Ajouter une poule</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Libellé</th>
+                            <th>Etat de match</th>
+                            <th class="text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    
+                    <tbody align="center">
+                        {% for poule in poules %}
+                            <tr>
+                                <td>{{ poule.libelle }}</td>
+                                <td>
+                                    
+                                    
+                                    {% if (poule.tournoi.statut >=1 ) %}
+                                        <span class="label label-success">Terminer 
+                                        </span>
+                                    {% else %}
+                                    {% if(poule.generated == 0) %}
+                                        <span class="label alert-danger">
+                                            <a href="{{ path('generate_match', {'id': poule.id})}}">Genrer les matchs</a>
+                                        </span>
+                                    {% else  %}
+                                        <span class="label alert-success">
+                                            <a href="#">Calandrier des Rencontres</a>
+                                        </span>
+                                    {% endif %}
+                                   {% endif %}
+                                </td>
+                                <td>
+                                    <span class="tooltip-area">
+                                        <a href="{{ path('poule_delete', { 'id': poule.id }) }}" class="btn btn-default btn-sm" title="Delete" onclick="return confirm('voulez vous supprimer?')"><i class="fa fa-trash-o"></i></a>
+                                        <a href="{{ path('poule_edit', { 'id': poule.id }) }}" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                         <a href="{{ path('calculscore', { 'idpoule': poule.id }) }}" class="btn btn-default btn-sm" title="Voir le classment"><i class="fa fa-list"></i></a>
+                                         
+                                         <a href="{{ path('listmatch_poule', { 'id': poule.id }) }}" class="btn btn-default btn-sm" title="Liste des matchs"><i class="fa fa-pencil-square-o"></i></a>
+                                    </span>
+                                    
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+    <script>
+        jQuery(document).ready(function () {
+            // Call dataTable in this page only
+            $('#table-example').dataTable();
+            
+        });
+    </script>
+
+{% endblock %}

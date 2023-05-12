@@ -1,0 +1,16 @@
+app_admin_users:
+    resource: "@AppUserBundle/Resources/config/routing/user.yml"
+    prefix:   /admin/users
+
+app_admin_joueur:
+    resource: "@AppUserBundle/Resources/config/routing/joueur.yml"
+    prefix:   /admin/joueur
+    
+app_dashbord:
+    path:     /admin/
+    defaults: { _controller: "AppUserBundle:Dashbord:index" }
+    
+app_redirect:
+    path: /
+    defaults: { _controller: "AppUserBundle:Dashbord:redirect" }
+

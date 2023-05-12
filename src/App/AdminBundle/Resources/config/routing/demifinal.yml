@@ -1,0 +1,11 @@
+change_statutdemifinal:
+    path:     /demifinal
+    defaults: { _controller: "AppAdminBundle:Demifinal:changestatut" }
+    options:
+        expose: true
+
+save_matchdemifinal:
+    path:   /savematchdemifina
+    defaults: { _controller: "AppAdminBundle:Demifinal:saveMatchdemifinal"}
+    options:
+        expose: true

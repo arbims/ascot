@@ -1,0 +1,24 @@
+espaceuser_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Espaceuser:index" }
+    methods:  GET
+
+espaceuser_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Espaceuser:show" }
+    methods:  GET
+
+espaceuser_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Espaceuser:new" }
+    methods:  [GET, POST]
+
+espaceuser_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Espaceuser:edit" }
+    methods:  [GET, POST]
+
+espaceuser_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Espaceuser:delete" }
+    methods:  DELETE

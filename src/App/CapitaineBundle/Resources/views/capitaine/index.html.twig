@@ -1,0 +1,41 @@
+{% extends "AppCapitaineBundle::capitainetemplate.html.twig" %}
+{% block body %}
+
+    <div class="col-lg-12">
+        <section class="panel">
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <th>Equipe 1</th>
+                    <th>VS</th>
+                    <th>Equipe 2</th>
+                    <th>Score</th>
+                    </thead>
+                    <tbody align="center">
+                        {% for match in matchs %}
+                            <tr>
+                                <td>{{match.equipe1}}</td>
+                                <td>Vs</td>
+                                <td>{{match.equipe2}}</td>
+                                <td><button class="btn btn-info btn-score" id="{{match.id}}">Score</button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+        {% endblock %}
+
+        {% block javascript %}
+
+            <script>
+                jQuery(document).ready(function ()
+                {
+                    $('.btn-score').on('click', function(){
+                        $id = $(this).attr('id');
+                        console.log($id);
+                    })
+                })
+            </script>
+        {%endblock %}

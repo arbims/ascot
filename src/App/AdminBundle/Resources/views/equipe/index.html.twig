@@ -1,0 +1,68 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} liste des équipes {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('equipe_new') }}">Ajouter une équipe</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Libellé</th>
+                            <th class="text-center"> Nombre des joueur </th>
+                            <th class="text-center">Action</th>
+
+                        </tr>
+                    </thead>
+                    <tbody align="center">
+                        {% for equipe in equipes %}
+                            <tr>
+                                <td>{{equipe.libelle}}</td>
+                                <td>
+                                    {% if(equipe.nombrejoueurexist>=equipe.nbrjoueur) %}
+                                        <span class="label alert-success">{{equipe.nombrejoueurexist}}/{{equipe.nbrjoueur}}</span>
+                                    {% else %}
+                                        <span class="label alert-danger">{{equipe.nombrejoueurexist}}/{{equipe.nbrjoueur}}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <span class="tooltip-area">
+                                        <a href="{{ path('equipe_delete', { 'id': equipe.id }) }}" class="btn btn-default btn-sm" title="Delete" onclick="return confirm('voulez vous supprimer?')"><i class="fa fa-trash-o"></i></a>
+                                        <a href="{{ path('equipe_edit', { 'id': equipe.id }) }}" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="{{ path('equipe_listjoueur', { 'id': equipe.id }) }}" class="btn btn-default btn-sm" title="Liste des joueurs"><i class="fa fa-list"></i></a>
+                                            {% if (equipe.nombrejoueurexist>=equipe.nbrjoueur) %}
+                                            <a  href="{{ path('equipe_listdoublet', { 'id': equipe.id }) }}" class="btn btn-default btn-sm" title="Liste des doublets"><i class="fa fa-list"></i></a>
+                                            {% else %}
+                                            <a disabled="disabled" href="{{ path('equipe_listdoublet', { 'id': equipe.id }) }}" class="btn btn-default btn-sm" title="Liste des doublets"><i class="fa fa-list"></i></a>
+                                            {% endif %}
+                                    </span>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+    <script>
+        jQuery(document).ready(function () {
+            // Call dataTable in this page only
+            $('#table-example').dataTable();
+
+        });
+    </script>
+
+{% endblock %}
+

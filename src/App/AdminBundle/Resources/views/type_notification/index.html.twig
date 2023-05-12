@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Type_Notification list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_Notification in type_Notifications %}
+            <tr>
+                <td><a href="{{ path('type_notification_show', { 'id': type_Notification.id }) }}">{{ type_Notification.id }}</a></td>
+                <td>{{ type_Notification.description }}</td>
+                <td>{{ type_Notification.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('type_notification_show', { 'id': type_Notification.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('type_notification_edit', { 'id': type_Notification.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('type_notification_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+pays_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Pays:index" }
+    methods:  GET
+
+pays_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Pays:show" }
+    methods:  GET
+
+pays_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Pays:new" }
+    methods:  [GET, POST]
+
+pays_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Pays:edit" }
+    methods:  [GET, POST]
+
+pays_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Pays:delete" }
+    methods:  DELETE

@@ -1,0 +1,28 @@
+resultat_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Resultat:index" }
+    methods:  GET
+
+resultat_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Resultat:show" }
+    methods:  GET
+
+resultat_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Resultat:new" }
+    methods:  [GET, POST]
+
+resultat_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Resultat:edit" }
+    methods:  [GET, POST]
+
+resultat_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Resultat:delete" }
+    methods:  DELETE
+
+calculscore:
+    path:   /getscore/{idpoule}
+    defaults: { _controller: "AppAdminBundle:Result:calculscore" }

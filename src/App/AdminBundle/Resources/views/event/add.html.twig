@@ -1,0 +1,89 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} Ajouter une actualité {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('event_new') }}" {{ form_enctype(form) }}
+                          class="panel panel-default">
+                        {{ form_errors(form) }}
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.titre) }}</div>
+                                    <label>Titre</label>
+                                    {{ form_widget(form.titre, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                 <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.date) }}</div>
+                                    <label>Date</label></br>
+                                    {{ form_widget(form.date, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                         
+                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="alert-danger">{{ form_errors(form.description) }}</div>
+                                        <label>Description</label>
+                                        {{ form_widget(form.description, {'attr': {'class':'form-control'}}) }}
+                                    </div>
+                                </div>
+                         
+
+
+                            {{ form_widget(form._token) }}
+                            <div class="col-md-12"><input type="submit" value="Enregistrer" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {{ elfinder_tinymce_init4() }}
+    {{ tinymce_init() }}
+
+{% endblock %}
+{% block javascript %}
+    <script>
+        jQuery(document).ready(function () {
+            $('#gallerieactualite').on('click', function () {
+                $('#datamedia').append('' +
+                        '<div class="col-md-6"><div class="col-md-8"><label></label><input type="file" name="actualite[file][]"/></div>' +
+                        '<div class="col-md-4"> <input type="button" class="btn-sm btn-danger" value="-" onclick="$(this).parent().parent().remove();"></div></div>');
+            });
+            $('#actualite_type_0').on('click', function () {
+                $('#datamedia').empty();
+                console.log(0);
+                $('#gallerieactualite').hide();
+                $('#datamedia').append('' +
+                        '<div class="col-md-6"><div class="form-group"><label></label><input type="file" name="actualite[file][]" /></div>' +
+                        '</div></div>');
+            })
+            $('#actualite_type_1').on('click', function () {
+                $('#datamedia').empty();
+                console.log('1');
+                $('#gallerieactualite').hide();
+                $('#datamedia').append('' +
+                        '<div class="col-md-6"><div class="form-group"><label></label><input type="text" name="actualite[file][]" class="form-control"/></div>' +
+                        '</div></div>');
+            })
+            $('#actualite_type_2').on('click', function () {
+                $('#datamedia').empty();
+                console.log('2');
+                $('#gallerieactualite').show();
+            })
+            $('#actualite_date').datetimepicker({
+                
+            })
+        });
+    </script>
+{% endblock %}

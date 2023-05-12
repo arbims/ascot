@@ -1,0 +1,82 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Liste des doublets {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('doublet_new') }}">Ajouter un Doublet</a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                    <tr>
+                        
+                        <th>Equipe</th>
+                        <th>Libellé</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody align="center">
+                    {% for doublet in doublets %}
+                        <tr>
+                            
+                            <td>{{ doublet.equipe.libelle }}</td>
+                            <td>{{ doublet.libelle }}</td>
+                            <td>
+                                <span class="tooltip-area">
+                                        <a href="{{ path('doublet_delete', { 'id': doublet.id }) }}" class="btn btn-default btn-sm" title="Delete" onclick="return confirm('voulez vous supprimer?')"><i class="fa fa-trash-o"></i></a>
+                                        <a href="{{ path('doublet_edit', { 'id': doublet.id }) }}" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                    </span>
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+                  {% block javascript %}
+
+
+                      <script>
+                          function fnShowHide(iCol, table) {
+                              var oTable = $(table).dataTable();
+                              var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+                              oTable.fnSetColumnVis(iCol, bVis ? false : true);
+                          }
+
+                          $(function () {
+
+                              //////////     DATA TABLE  COLUMN TOGGLE    //////////
+                              $('[data-table="table-toggle-column"]').each(function (i) {
+                                  var data = $(this).data(),
+                                          table = $(this).data("table-target"),
+                                          dropdown = $(this).parent().find(".dropdown-menu"),
+                                          col = new Array;
+                                  $(table).find("thead th").each(function (i) {
+                                      $("<li><a  class='toggle-column' href='javascript:void(0)' onclick=fnShowHide(" + i + ",'" + table + "') ><i class='fa fa-check'></i> " + $(this).text() + "</a></li>").appendTo(dropdown);
+                                  });
+                              });
+
+                              //////////     COLUMN  TOGGLE     //////////
+                              $("a.toggle-column").on('click', function () {
+                                  $(this).toggleClass("toggle-column-hide");
+                                  $(this).find('.fa').toggleClass("fa-times");
+                              });
+
+                              // Call dataTable in this page only
+                              $('#table-example').dataTable();
+                              $('table[data-provide="data-table"]').dataTable();
+                          });
+                      </script>
+
+                  {% endblock %}
+
+

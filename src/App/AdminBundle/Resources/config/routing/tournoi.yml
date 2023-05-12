@@ -1,0 +1,38 @@
+tournoi_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Tournoi:index" }
+    methods:  GET
+
+tournoi_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Tournoi:new" }
+    methods:  [GET, POST]
+
+tournoi_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Tournoi:edit" }
+    methods:  [GET, POST]
+
+tournoi_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Tournoi:delete" }
+
+tournoi_show:
+    path:   /{id}/show
+    defaults: { _controller: "AppAdminBundle:Tournoi:show" }
+
+terminer_poule_etape:
+    path:  /terminerpouleetape/{id}
+    defaults: { _controller: "AppAdminBundle:Tournoi:termineretape1" }
+
+change_statut_final:
+    path:  /termineretapedemifnal
+    defaults: { _controller: "AppAdminBundle:Tournoi:setetap3" }
+    options:
+        expose: true
+
+statut_getchampion:
+    path:  /getchampion
+    defaults: { _controller: "AppAdminBundle:Tournoi:setetapechampion" }
+    options:
+        expose: true

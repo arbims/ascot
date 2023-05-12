@@ -1,0 +1,20 @@
+event_index:
+    path: /
+    defaults: { _controller: "AppAdminBundle:Events:index" }
+    
+event_new:
+    path:  /add
+    defaults: { _controller: "AppAdminBundle:Events:add" }
+
+event_edit:
+    path:  /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Events:edit" }
+
+event_delete:
+    path:  /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Events:delete" }
+    
+
+user_fullcalendar:
+     path:   /fullcalendar
+     defaults: { _controller: "AppAdminBundle:Events:fullcalendar" }

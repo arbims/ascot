@@ -1,0 +1,73 @@
+app_admin_ajax:
+    resource: "@AppAdminBundle/Resources/config/routing/ajax.yml"
+    prefix:   /admin/
+app_admin_espaceuser:
+    resource: "@AppAdminBundle/Resources/config/routing/espaceuser.yml"
+    prefix:   /admin/espaceuser
+app_admin_poule:
+    resource: "@AppAdminBundle/Resources/config/routing/poule.yml"
+    prefix:   /admin/poule
+app_admin_actualite:
+    resource: "@AppAdminBundle/Resources/config/routing/actualite.yml"
+    prefix:   /admin/actualite
+app_admin_doublet:
+    resource: "@AppAdminBundle/Resources/config/routing/doublet.yml"
+    prefix:   /admin/doublet
+app_admin_equipe:
+    resource: "@AppAdminBundle/Resources/config/routing/equipe.yml"
+    prefix:   /admin/equipe
+app_admin_evaluation:
+    resource: "@AppAdminBundle/Resources/config/routing/evaluation.yml"
+    prefix:   /admin/evaluation
+
+app_admin_match:
+    resource: "@AppAdminBundle/Resources/config/routing/matchs.yml"
+    prefix:   /admin/matchs
+
+app_admin_notification:
+    resource: "@AppAdminBundle/Resources/config/routing/notification.yml"
+    prefix:   /admin/notification
+
+app_admin_pays:
+    resource: "@AppAdminBundle/Resources/config/routing/pays.yml"
+    prefix:   /admin/pays
+
+app_admin_rencontre:
+    resource: "@AppAdminBundle/Resources/config/routing/rencontre.yml"
+    prefix:   /admin/rencontre
+    
+app_admin_result:
+    resource: "@AppAdminBundle/Resources/config/routing/result.yml"
+    prefix:   /admin/result
+
+app_admin_type_notification:
+    resource: "@AppAdminBundle/Resources/config/routing/type_notification.yml"
+    prefix:   /admin/type_notification
+app_admin_ville:
+    resource: "@AppAdminBundle/Resources/config/routing/ville.yml"
+    prefix:   /admin/ville
+app_admin_tournoi:
+    resource: "@AppAdminBundle/Resources/config/routing/tournoi.yml"
+    prefix:   /admin/tournoi
+
+app_admin_court:
+    resource: "@AppAdminBundle/Resources/config/routing/court.yml"
+    prefix:   /admin/court
+
+app_admin_event:
+    resource: "@AppAdminBundle/Resources/config/routing/event.yml"
+    prefix:   /admin/event
+
+app_admin_score:
+    resource: "@AppAdminBundle/Resources/config/routing/score.yml"
+    prefix:   /admin/score
+
+app_admin_demifinal:
+    resource: "@AppAdminBundle/Resources/config/routing/demifinal.yml"
+    prefix:   /admin/
+ 
+
+
+
+
+

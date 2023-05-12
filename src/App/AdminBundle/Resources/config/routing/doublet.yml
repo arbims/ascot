@@ -1,0 +1,33 @@
+doublet_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Doublet:index" }
+    methods:  GET
+
+doublet_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Doublet:show" }
+    methods:  GET
+
+doublet_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Doublet:new" }
+    methods:  [GET, POST]
+
+doublet_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Doublet:edit" }
+    methods:  [GET, POST]
+
+doublet_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Doublet:delete" }
+
+doublet_listjoueur:
+    path:   /listjoueur/{id}
+    defaults: { _controller: "AppAdminBundle:Doublet:listjoueur" }
+    options:
+        expose: true
+
+doublet_joueur:
+    path:  /{id}/detailjoueur
+    defaults: { _controller: "AppAdminBundle:Doublet:detailjoueur" }

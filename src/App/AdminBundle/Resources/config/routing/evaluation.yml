@@ -1,0 +1,24 @@
+evaluation_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Evaluation:index" }
+    methods:  GET
+
+evaluation_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Evaluation:show" }
+    methods:  GET
+
+evaluation_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Evaluation:new" }
+    methods:  [GET, POST]
+
+evaluation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Evaluation:edit" }
+    methods:  [GET, POST]
+
+evaluation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Evaluation:delete" }
+    methods:  DELETE

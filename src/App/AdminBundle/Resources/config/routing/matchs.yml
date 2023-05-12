@@ -1,0 +1,27 @@
+matchs_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Matchs:index" }
+    methods:  GET
+
+matchs_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Matchs:show" }
+    methods:  GET
+
+matchs_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Matchs:new" }
+    methods:  [GET, POST]
+
+matchs_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Matchs:edit" }
+    methods:  [GET, POST]
+
+matchs_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Matchs:delete" }
+
+set_score:
+    path:    /setscore
+    defaults: { _controller: "AppAdminBundle:Matchs:setscore" }

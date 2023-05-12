@@ -1,0 +1,149 @@
+
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Ajouter une poule {% endblock %}
+{% block body %}
+    <!--modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="box box-danger">
+                            <div class="panel-body">
+                                <form method="post" action="{{ path('equipe_new') }}"  enctype="multipart/form-data" class="panel panel-default">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.libelle) }}</div>
+                                            <label>Libellé</label>
+                                            {{ form_widget(formpoule.libelle, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.nbrjoueur) }}</div>
+                                            <label>Nombre des joueurs</label>
+                                            {{ form_widget(formpoule.nbrjoueur, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.adresse) }}</div>
+                                            <label>Adresse</label>
+                                            {{ form_widget(formpoule.adresse, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.pays) }}</div>
+                                            <label>Pays</label>
+                                            {{ form_widget(formpoule.pays, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.ville) }}</div>
+                                            <label>Ville</label>
+                                            {{ form_widget(formpoule.ville, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.website) }}</div>
+                                            <label>Site Web</label>
+                                            {{ form_widget(formpoule.website, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.mail) }}</div>
+                                            <label>Email</label>
+                                            {{ form_widget(formpoule.mail, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="alert-danger">{{ form_errors(formpoule.tel) }}</div>
+                                            <label>Numéro de téléphone</label>
+                                            {{ form_widget(formpoule.tel, {'attr': {'class':'form-control'}}) }}
+                                        </div>
+                                    </div>
+
+                                    {{form_widget(formpoule._token)}}
+                                    <div class="col-md-12"><input type="submit" value="Enregistrer" class="btn btn-primary" /></div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- -->
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <a type="button" class="btn-sm btn-primary pull-right" data-toggle="modal" data-target="#myModal" >Ajouter une equipe<i class="fa fa-plus"></i></a>
+                    </div>
+                    <form method="post" action="{{ path('poule_new') }}"  enctype="multipart/form-data" class="panel panel-default">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.tournoi) }}</div>
+                                <label>Tournoi</label>
+                                {{ form_widget(form.tournoi, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.libelle) }}</div>
+                                <label>Libellé</label>
+                                {{ form_widget(form.libelle, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.numberequipe) }}</div>
+                                <label>Nombre d'équipe</label>
+                                {{ form_widget(form.numberequipe, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.equipelist) }}</div>
+                                <label>Equipe</label>
+                                {{ form_widget(form.equipelist, {'id':'equipe','attr': {'class':'form-control'}}) }}
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">{{form_widget(form._token)}}
+                            <input type="submit" value="Enregistrer" class="btn btn-primary" /></div>
+
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{asset('bundles/chosen/chosen.css')}}" />
+    <script type="text/javascript" src="{{asset('bundles/chosen/chosen.jquery.min.js')}}"></script>
+    <script>
+        (function ($) {
+            $('#equipe').chosen();
+        })(jQuery);
+
+        jQuery(document).ready(function () {
+            $('#poule_tournoi').on('change', function () {
+                $id = $(this).val();
+                $urldel = Routing.generate('gettournoi_info', {id: $id}, true);
+                $.ajax({
+                    type: 'POST',
+                    url: $urldel,
+                    //data: 'idposts=' + $iddel,
+                    //dataType: 'json',
+                    success: function (retour) {
+                        retour = jQuery.parseJSON(retour);
+                        console.log(retour);
+                        console.log(retour.id);
+                        $('#poule_numberequipe').val(retour.equipepoule);
+                    },
+                    error: function (retour) {
+                        console.log("errur" + JSON.stringify(retour));
+                    }
+                })
+            })
+        })
+    </script>
+{% endblock %}

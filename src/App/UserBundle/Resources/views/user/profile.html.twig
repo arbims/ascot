@@ -1,0 +1,69 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Profile {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('user_profile') }}"  enctype="multipart/form-data" class="panel panel-default">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <img class="profile-pic"alt="" src="{{ asset('uploads/users/'~app.user.picture) }}" style="width: 80px;display: block; height: 60px; ">
+                                <div class="upload-button" >Ajouter Image</div>
+                                                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input type="text" value="{{ usercompte.nom }}" id="user_nom" name="user[nom]" required="required" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Prénom</label>
+                                    <input type="text" value="{{ usercompte.prenom }}" id="user_nom" name="user[prenom]" required="required" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Numéro de Téléphone</label>
+                                    <input type="text" value="{{ usercompte.numtel }}" id="user_nom" name="user[numtel]" required="required" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12"><input type="submit" value="Modifier" class="btn btn-primary" /></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+        $(function () {
+            $('#app_adminbundle_user_file').on('change', function () {
+                $("#preview").each(function (e) {
+                    this.remove();
+                });
+                var file = $(this);
+                var reader = new FileReader;
+                reader.onload = function (event) {
+                    var img = new Image();
+                    img.onload = function () {
+                        var width = 140;
+                        var height = 90
+                        var canvas = $('<canvas id="preview"></canvas>').attr({width: width, height: height});
+                        file.after(canvas);
+                        var context = canvas[0].getContext('2d');
+                        context.drawImage(img, 0, 0, width, height);
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file[0].files[0]);
+            });
+        });
+    </script>
+{% endblock %}

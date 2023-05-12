@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Rencontre list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Journee</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rencontre in rencontres %}
+            <tr>
+                <td><a href="{{ path('rencontre_show', { 'id': rencontre.id }) }}">{{ rencontre.id }}</a></td>
+                <td>{{ rencontre.journee }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('rencontre_show', { 'id': rencontre.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('rencontre_edit', { 'id': rencontre.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('rencontre_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

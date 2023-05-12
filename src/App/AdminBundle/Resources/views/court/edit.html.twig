@@ -1,0 +1,40 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Modifier un court {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('court_edit',{'id':court.id}) }}"  enctype="multipart/form-data" class="panel panel-default">
+
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.libelle) }}</div>
+                                    <label>Libellé</label>
+                                    {{ form_widget(form.libelle, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+                        {{form_widget(form._token)}}
+                        <div class="col-md-12"><input type="submit" value="Modifier" class="btn btn-primary" /></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{asset('bundles/chosen/chosen.css')}}" />
+    <script type="text/javascript" src="{{asset('bundles/chosen/chosen.jquery.min.js')}}"></script>
+    <script>
+
+    </script>
+{% endblock %}

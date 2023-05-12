@@ -1,0 +1,120 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} Ajouter un utilisateur {% endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('user_new') }}" enctype="multipart/form-data"
+                          class="panel panel-default">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <div class="alert-danger">{{ form_errors(form.file) }}</div>
+                                    <label>Image</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group image-preview">
+                                            <input type="text" class="form-control image-preview-filename"
+                                                   disabled="disabled">
+                                            <!-- don't give a name === doesn't send on POST/GET -->
+                                                    <span class="input-group-btn">
+                                                        <!-- image-preview-clear button -->
+                                                        <button type="button"
+                                                                class="btn btn-default image-preview-clear"
+                                                                style="display:none;">
+                                                            <span class="glyphicon glyphicon-remove"></span> Clear
+                                                        </button>
+                                                        <!-- image-preview-input -->
+                                                        <div class="btn btn-default image-preview-input">
+                                                            <span class="glyphicon glyphicon-folder-open"></span>
+                                                            <span class="image-preview-input-title">Browse</span>
+                                                            {{ form_widget(form.file) }}<!-- rename it -->
+                                                        </div>
+                                                    </span>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.nom) }}</div>
+                                    <label>Nom</label>
+                                    {{ form_widget(form.nom, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.prenom) }}</div>
+                                    <label>Prénom</label>
+                                    {{ form_widget(form.prenom , {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.username) }}</div>
+                                    <label>Nom d'utilisateur</label>
+                                    {{ form_widget(form.username , {'attr': {'class':'form-control' }}) }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.email) }}</div>
+                                    <label>Email</label>
+                                    {{ form_widget(form.email , {'attr': {'class':'form-control' }}) }}
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.plainPassword.first) }}</div>
+                                    <label>Mot de passe</label>
+                                    {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.plainPassword.second) }}</div>
+                                    <label>Répéter mot de passe</label>
+                                    {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.roles) }}</div>
+                                    <label>Rôle</label>
+                                    {{ form_widget(form.roles, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                               
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.enabled) }}</div>
+                                        <span>
+
+                                            {{ form_widget(form.enabled  , {'attr': {'type':'checkbox' }}) }}
+                                            <label for="customcheckbox1">&nbsp;&nbsp;Activate ?</label>
+                                        </span>
+                                </div>
+
+
+                        </div>
+                        {{ form_widget(form._token) }}
+                        <div class="col-md-12"><input type="submit" value="Enregistrer" class="btn btn-primary"/></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/chosen/chosen.css') }}"/>
+    <script type="text/javascript" src="{{ asset('bundles/chosen/chosen.jquery.min.js') }}"></script>
+    <script>
+        (function ($) {
+            $('select').chosen();
+        })(jQuery);
+        jQuery(document).ready(function () {
+            $(document).ready(function () {
+                $("#showpassword").click(function () {
+                    $("#password").slideToggle();
+                });
+            });
+        })
+    </script>
+{% endblock %}

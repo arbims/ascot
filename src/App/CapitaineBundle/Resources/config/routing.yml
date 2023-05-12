@@ -1,0 +1,4 @@
+set_score_match:
+    path: /capitaine/setscore/
+    defaults: { _controller: "AppCapitaineBundle:Capitaine:setscore"}
+

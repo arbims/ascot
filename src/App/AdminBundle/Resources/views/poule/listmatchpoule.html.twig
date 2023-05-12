@@ -1,0 +1,110 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+
+{% block body %}
+
+    {% for match in matchs %}
+        <div id="{{ match.id }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <form method="post" action="{{ path('set_score') }}">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Entrez le score</h4>
+                        </div>
+                        <input type="hidden" name="id" value="{{ match.id }}">
+                        <div class="modal-body">
+                            <input placeholder="Entrer le score Equipe1" name="score_eq1_match" class="form-control"
+                                   value="">
+                            <div class="clearfix"><br></div>
+                            <input placeholder="Entrer le score Equipe2" name="score_eq2_match" class="form-control"
+                                   value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Enregister</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    {% endfor %}
+    <div class="col-md-12">
+        <section class="panel">
+            <header class="panel-heading">
+                <a class="btn btn-primary" href="{{ path('matchs_new') }}"> Ajouter un Matchs </a>
+            </header>
+            <div class="panel-body">
+                <table id="table-example" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <td>Equipe 1</td>
+                        <td>Equipe 2</td>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for match in matchs %}
+                        <tr>
+                            <td><a href="{{ path('matchs_show', { 'id': match.id }) }}">{{ match.id }}</a></td>
+                            <td>{{ match.equipe1 }}</td>
+                            <td>{{ match.equipe2 }}</td>
+                            <td>
+                            <span class="tooltip-area">
+
+                                        <a href="#" data-toggle="modal" data-target="#{{ match.id }}" href="{{ path('set_score', { 'id': match.id }) }}"
+                                           class="btn btn-default btn-sm" title="Set Score"><i
+                                                    class="fa fa-pencil-square-o"></i></a>
+                                </span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+                </table>
+            </div><!-- /.box-body -->
+        </section>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+
+    <script>
+        function fnShowHide(iCol, table) {
+            var oTable = $(table).dataTable();
+            var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+            oTable.fnSetColumnVis(iCol, bVis ? false : true);
+        }
+
+        $(function () {
+
+            //////////     DATA TABLE  COLUMN TOGGLE    //////////
+            $('[data-table="table-toggle-column"]').each(function (i) {
+                var data = $(this).data(),
+                        table = $(this).data("table-target"),
+                        dropdown = $(this).parent().find(".dropdown-menu"),
+                        col = new Array;
+                $(table).find("thead th").each(function (i) {
+                    $("<li><a  class='toggle-column' href='javascript:void(0)' onclick=fnShowHide(" + i + ",'" + table + "') ><i class='fa fa-check'></i> " + $(this).text() + "</a></li>").appendTo(dropdown);
+                });
+            });
+
+            //////////     COLUMN  TOGGLE     //////////
+            $("a.toggle-column").on('click', function () {
+                $(this).toggleClass("toggle-column-hide");
+                $(this).find('.fa').toggleClass("fa-times");
+            });
+
+            // Call dataTable in this page only
+            $('#table-example').dataTable();
+            $('table[data-provide="data-table"]').dataTable();
+        });
+    </script>
+
+{% endblock %}
+

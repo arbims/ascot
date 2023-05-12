@@ -1,0 +1,31 @@
+equipe_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Equipe:index" }
+    methods:  GET
+
+equipe_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Equipe:show" }
+    methods:  GET
+
+equipe_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Equipe:new" }
+    methods:  [GET, POST]
+
+equipe_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Equipe:edit" }
+    methods:  [GET, POST]
+
+equipe_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Equipe:delete" }
+
+equipe_listjoueur:
+    path: /{id}/listjoueur
+    defaults: { _controller: "AppAdminBundle:Equipe:listjouer" }
+    
+equipe_listdoublet:
+    path : /{id}/listdoublet
+    defaults: { _controller: "AppAdminBundle:Equipe:listdoubet" }

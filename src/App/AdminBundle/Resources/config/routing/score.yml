@@ -1,0 +1,7 @@
+rencontre_savescore:
+    path:  /savescore
+    defaults: { _controller: "AppAdminBundle:Score:savescore" }
+
+rencontre_savescore_etape2:
+    path:  /savescoreetape2
+    defaults: { _controller: "AppAdminBundle:Score:savescoreetape2" }

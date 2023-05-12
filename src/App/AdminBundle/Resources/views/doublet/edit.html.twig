@@ -1,0 +1,73 @@
+{% extends 'AppAdminBundle::default.html.twig'%}
+{% block title %} Modifier un doublet {%endblock %}
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('doublet_edit',{'id':doublet.id}) }}"  enctype="multipart/form-data" class="panel panel-default">
+
+                        
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.libelle) }}</div>
+                                    <label>Libellé</label>
+                                    {{ form_widget(form.libelle, {'attr': {'class':'form-control'}}) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="alert-danger">{{ form_errors(form.equipe) }}</div>
+                                    <label>Liste des équipes</label>
+                                    {{ form_widget(form.equipe, {'attr': {'class':'form-control'}}) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Liste des joueurs</label>
+                                     {{ form_widget(form.listjoueur, {'id':'listjoueur','attr': {'class':'form-control'}}) }}
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        {{form_widget(form._token)}}
+                        <div class="col-md-12"><input type="submit" value="Modifier" class="btn btn-primary" /></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <link type="text/css" rel="stylesheet" href="{{asset('bundles/chosen/chosen.css')}}" />
+    <script type="text/javascript" src="{{asset('bundles/chosen/chosen.jquery.min.js')}}"></script>
+    <script>
+         
+        jQuery(document).ready(function () {
+            $('#doublet_equipe').on('click', function () {
+                $iddel = $(this).val();
+                console.log($iddel);
+                $('#listjoueur').empty();
+                $urldel = Routing.generate('doublet_listjoueur', {id: $iddel}, true);
+                $.ajax({
+                    type: 'POST',
+                    url: $urldel,
+                    //data: 'idposts=' + $iddel,
+                    //dataType: 'json',
+                    success: function (retour) {
+                        console.log(retour);
+                        retour = jQuery.parseJSON(retour);
+                        console.log(retour);
+                        $.each(retour, function (key, val) {
+                            $('#listjoueur').append('<option value="' + key + '">' + val + '</option> ')
+                        });
+                    },
+                    error: function (retour) {
+                        console.log("errur" + JSON.stringify(retour));
+                    }
+                })
+            })
+        });
+    </script>
+{% endblock %}

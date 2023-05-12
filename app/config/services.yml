@@ -1,0 +1,31 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+        
+    Repository_uploadfileController:
+        class: App\AdminBundle\Controller\UploadfileController
+        calls:
+            - [setContainer, [@service_container]]
+    Repository_saveresultController:
+        class: App\AdminBundle\ResultController
+        calls:
+            - [setContainer, [@service_container]]
+
+    Repository_DemifinalController:
+        class: App\AdminBundle\Controller\DemifinalController
+        calls:
+            - [setContainer, [@service_container]]
+            
+    redirect.after.login:
+        class: App\UserBundle\Redirection\AfterLoginRedirection
+        arguments: [@router]
+            

@@ -1,0 +1,585 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} liste des tournois {% endblock %}
+{% block body %}
+    <!-- modal add -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="left: -35%;">
+
+            <!-- Modal content-->
+            <div class="modal-content" >
+                <form method="post" action="{{ path('rencontre_senddata') }}" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="image-alert">
+                        </div>
+                        <div class="col-md-8" id="etatmodal">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Equipe1</label>
+                                    <input type="text" name="rencontre[doublet][]" value="" id="equipe1" readonly="true"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet1</label>
+                                    <select name="rencontre[doublet1][]" id="doublet1e1" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet2</label>
+                                    <select name="rencontre[doublet1][]" id="doublet2e1" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet3</label>
+                                    <select name="rencontre[doublet1][]" id="doublet3e1" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <br><br><br>
+
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input name="rencontre[date][]" type="text" value="" id="datematch" readonly="true"
+                                           class="form-control">
+                                    <input name="rencontre[match]" type="hidden" value="" id="idmatch">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input name="rencontre[date][]" type="text" value="" id="datematch1" readonly="true"
+                                           class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input name="rencontre[date][]" type="text" value="" id="datematch2" readonly="true"
+                                           class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Equipe2</label>
+                                    <input type="text" value="" id="equipe2" readonly="true" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet1</label>
+                                    <select name="rencontre[doublet2][]" id="doublet1e2" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet2</label>
+                                    <select name="rencontre[doublet2][]" id="doublet2e2" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Doublet3</label>
+                                    <select name="rencontre[doublet2][]" id="doublet3e2" class="form-control doublet">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="etatmodal2">
+                            <br><br><br>
+
+                            <div class="form-group" style="padding-top: 13px;">
+                                <label>court</label>
+                                <select name="rencontre[court][]" class="form-control">
+                                    {% for c in court %}
+                                        <option value="{{ c.libelle }}">{{ c.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>court</label>
+                                <select name="rencontre[court][]" class="form-control">
+                                    {% for c in court %}
+                                        <option value="{{ c.libelle }}">{{ c.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>court</label>
+                                <select name="rencontre[court][]" class="form-control">
+                                    {% for c in court %}
+                                        <option value="{{ c.libelle }}">{{ c.libelle }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div id="etatmodal3">
+                            <input type="submit" value="Enregistrer" class="btn btn-primary">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal edit -->
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg" style="left: -35%;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form method="post" action="{{ path('rencontre_savescore_etape2') }}">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="modal-body">
+
+                            <div class="col-md-8">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Equipe1</label>
+                                        <input type="text" name="rencontre[doublet][]" readonly value="" id="edit_equipe1"
+                                               readonly="true"
+                                               class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet1</label>
+                                        <input name="rencontre[doublet1][]" value="" readonly id="edit_doublet1e1"
+                                               class="form-control doublet">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet2</label>
+                                        <input name="rencontre[doublet1][]" value="" readonly id="edit_doublet2e1"
+                                               class="form-control doublet">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet3</label>
+                                        <input name="rencontre[doublet1][]" value="" readonly id="edit_doublet3e1"
+                                               class="form-control doublet">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>Date</label>
+                                        <input name="rencontre[date]" type="text" readonly value="" id="edit_datematch"
+                                               readonly="true"
+                                               class="form-control">
+                                        <input name="rencontre[matchedit]" type="hidden" value="" id="idmatchedit">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Score</label>
+                                        <input name="rencontre[score][match1][]" value=""  id="edit_score1"
+                                               class="form-control doublet">
+                                        <input type="hidden" name="rencontre[score][match1][id]" value="" id="match1id">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Score</label>
+                                        <input name="rencontre[score]['match2][]" value="" id="edit_score2"
+                                               class="form-control doublet">
+                                        <input type="hidden" name="rencontre[score]['match2][id]" value="" id="match2id">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Score</label>
+                                        <input name="rencontre[score][match3][]" value="" id="edit_score3"
+                                               class="form-control doublet">
+                                        <input type="hidden" name="rencontre[score][match3][id]" value="" id="match3id">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Equipe2</label>
+                                        <input type="text" value="" id="edit_equipe2" readonly="true" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet1</label>
+                                        <input name="rencontre[doublet2][]" value="" readonly id="edit_doublet1e2"
+                                               class="form-control doublet">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet2</label>
+                                        <input name="rencontre[doublet2][]" value="" readonly id="edit_doublet2e2"
+                                               class="form-control doublet">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Doublet3</label>
+                                        <input name="rencontre[doublet2][]" value="" readonly id="edit_doublet3e2"
+                                               class="form-control doublet">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <br><br><br>
+
+                                <div class="form-group" style="padding-top: 13px;">
+                                    <label>court</label>
+                                    <input name="rencontre[court][]" readonly class="form-control" id="edit_court1">
+                                </div>
+                                <div class="form-group">
+                                    <label>court</label>
+                                    <input name="rencontre[court][]" readonly class="form-control" id="edit_court2">
+
+                                </div>
+                                <div class="form-group">
+                                    <label>court</label>
+                                    <input name="rencontre[court][]" readonly class="form-control" id="edit_court3">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" value="Enregistrer" class="btn btn-primary">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- -->
+
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <input id="id-tournoi" value="{{ tournoi.id }}" type="hidden">
+                        <div class="alert alert-info center-block"><p
+                                style="text-align: center;">{{ tournoi.titre }}</p></div>
+                        <div class="alert alert-info center-block"><p style="text-align: center;">Qalification</p></div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    {% for classment in classments %}
+                        <div class="col-md-6">
+                            <table id="table-example" class="table table-bordred">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Libellé</th>
+                                        <th>Reultat</th>
+                                        <th>Matchs gagnés</th>
+                                        <th>Matchs perdus</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody align="center">
+                                    {% for e in classment.classment %}
+                                        <tr>
+                                            <td>{{ e.equipe }}</td>
+                                            <td>{{ e.result }}</td>
+                                            <td>{{ e.wons }}</td>
+                                            <td>{{ e.lost }}</td>
+                                        </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br><br>
+                {% if (tournoi.statut is null) %}
+                    <div class="col-md-12">
+                        <a id="terminerstep1" class="btn btn-success center-block">
+                            Terminer</a>
+                        <br><br>
+                    </div>
+                {% else %}
+                    <br> <br>
+                {% endif %}
+
+                <div class="col-md-12">
+                    {% if (tournoi.statut == 1) %}
+                        <div class="alert alert-info center-block"><p style="text-align: center;">Matchs de Classment</p>
+                        </div>
+                        {% for match in matchclassment %}
+                            <div class="col-ms-12">
+                                <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                             value="{{ match.equipe1 }}"></div>
+                                <div class="col-md-1"><p style="text-align: center">VS</p></div>
+                                <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                             value="{{ match.equipe2 }}"></div>
+                                    {% if ( match.statut is null ) %}
+
+                                    <div class="col-md-1"><a url="add" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal">detail</a></div>
+
+                                {% else %}
+                                    {% if (match.terminer == 'terminer') %}
+                                        <div class="col-md-1"><a id="{{match.id}}" disabled="disabled" url="edit" type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+                                    {% else %}
+                                        <div class="col-md-1"><a url="edit" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+
+                                    {% endif %}
+                                {% endif %}
+                                <br><br>
+                            </div>
+                        {% endfor %}
+                        <div class="col-md-12">
+
+                            <br><br>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="alert alert-info center-block"><p style="text-align: center;">Demi final</p>
+                        </div>
+                        {% for match in demifinal %}
+                            <div class="col-ms-12">
+                                <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                             value="{{ match.equipe1 }}"></div>
+                                <div class="col-md-1"><p style="text-align: center">VS</p></div>
+                                <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                             value="{{ match.equipe2 }}"></div>
+                                    {% if (match.statut is null  ) %}
+                                    <div class="col-md-1"><a url="add" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal">detail</a></div>
+                                {% else %}
+                                    {% if (match.terminer == 'terminer') %}
+                                        <div class="col-md-1"><a id="{{match.id}}" disabled="disabled" url="edit" type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+                                    {% else %}
+                                        <div class="col-md-1"><a url="edit" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+
+                                    {% endif %}                               {% endif %}
+                                    <br><br>
+                                </div>
+                            {% endfor %}
+
+                            {% if (tournoi.statut== 1 ) %}
+                                <div class="col-md-12">
+                                    <a id="terminerstep2" class="btn btn-success center-block">
+                                        Terminer</a>
+                                    <br><br>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if (tournoi.statut == 2) %}
+                            <div class="alert alert-info center-block"><p style="text-align: center;">Match de Final</p>
+                            </div>
+                            {% for match in final %}
+                                <div class="col-ms-12">
+                                    <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                                 value="{{ match.equipe1 }}"></div>
+                                    <div class="col-md-1"><p style="text-align: center">VS</p></div>
+                                    <div class="col-md-5"><input readonly type="text" class="form form-control"
+                                                                 value="{{ match.equipe2 }}"></div>
+                                        {% if ( match.statut is null ) %}
+
+                                        <div class="col-md-1"><a url="add" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal">detail</a></div>
+
+                                    {% else %}
+                                        {% if (match.terminer == 'terminer') %}
+                                            <div class="col-md-1"><a id="{{match.id}}" disabled="disabled" url="edit" type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+                                        {% else %}
+                                            <div class="col-md-1"><a url="edit" id="{{match.id}}"  type="button" class="btn btn-info btn-sm matchid" data-toggle="modal" data-target="#myModal2">detail</a></div>
+
+                                        {% endif %}
+                                    {% endif %}
+                                    <br><br>
+                                </div>
+                            {% endfor %}
+                            <div class="col-md-12">
+                                <a id="terminerstep3" class="btn btn-success center-block">
+                                    Terminer</a>
+                                <br><br>
+                                <br><br>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if(tournoi.statut == 3) %}
+                        <div class="alert alert-info center-block"><p style="text-align: center;">Champion</p>
+                        </div>
+                        <div class="alert alert-warning center-block"><p style="text-align: center;">{{ champion.0 }}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+
+    {% endblock %}
+
+    {% block javascript %}
+
+        <script>
+            jQuery(document).ready(function () {
+                $id = $('#id-tournoi').val();
+                $url = Routing.generate('change_statutdemifinal', {id: $id}, true);
+                $urlfinalstatut = Routing.generate('change_statut_final', {id: $id}, true);
+                $urlterminertournoi = Routing.generate('statut_getchampion', {id: $id}, true);
+                $('#terminerstep1').on('click', function () {
+                    console.log($id);
+                    console.log('test');
+                    $.ajax({
+                        type: "POST",
+                        url: $url,
+                        data: 'id=' + $id,
+                        success: function (data) {
+                            console.log(data);
+                            location.reload();
+                        },
+                        error: function () {
+
+                        }
+                    })
+                })
+                $('#terminerstep2').on('click', function () {
+                    console.log($id);
+                    console.log('test');
+                    $.ajax({
+                        type: "POST",
+                        url: $urlfinalstatut,
+                        data: 'id=' + $id,
+                        success: function (data) {
+                            console.log(data);
+                            location.reload();
+                        },
+                        error: function () {
+
+                        }
+                    })
+                })
+                $('#terminerstep3').on('click', function () {
+                    $.ajax({
+                        type: "POST",
+                        url: $urlterminertournoi,
+                        data: 'id=' + $id,
+                        success: function (data) {
+                            console.log(data);
+                            //location.reload();
+                        },
+                        error: function () {
+
+                        }
+                    })
+                });
+                $('.matchid').on('click', function () {
+                    $('.image-alert').empty();
+                    $idmatch = $(this).attr('id');
+                    console.log($(this).attr('url'));
+                    if ($(this).attr('url') == 'add') {
+                        $urlmatch = Routing.generate('match_detail', {id: $idmatch}, true);
+                    } else {
+                        $urlmatch = Routing.generate('match_detail_edit', {id: $idmatch}, true);
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: $urlmatch,
+                        data: $(this).serialize(),
+                        success: function (data) {
+                            data = jQuery.parseJSON(data);
+                            if (data.statut == true) {
+                                // console.log('true');
+                                // console.log(data.equipe1);
+                                console.log(data);
+                                console.log(data.data[0]);
+                                $('#idmatchedit').val(data.data[0].id);
+                                $('#edit_equipe1').val(data.equipe1);
+                                $('#edit_equipe2').val(data.equipe2);
+                                $('#edit_datematch').val(data.data[0].date);
+                                $('#edit_court1').val(data.data[0].court);
+                                $('#edit_doublet1e1').val(data.data[0].doublet1.libelle);
+                                $('#edit_doublet1e2').val(data.data[0].doublet2.libelle);
+                                $('#edit_court2').val(data.data[1].court);
+                                $('#edit_doublet2e1').val(data.data[1].doublet1.libelle);
+                                $('#edit_doublet2e2').val(data.data[1].doublet2.libelle);
+                                $('#edit_court3').val(data.data[2].court);
+                                $('#edit_doublet3e1').val(data.data[2].doublet1.libelle);
+                                $('#edit_doublet3e2').val(data.data[2].doublet2.libelle);
+                                $('#match1id').val(data.data[0].id);
+                                $('#match2id').val(data.data[1].id);
+                                $('#match3id').val(data.data[2].id);
+                            } else {
+                                $lengthdoublet1 = data.equipe1.doublet.length;
+                                $lengthdoublet2 = data.equipe2.doublet.length;
+                                if ($lengthdoublet1 < 3 || $lengthdoublet2 < 3) {
+                                    $('#etatmodal').hide();
+                                    $('#etatmodal2').hide();
+                                    $('#etatmodal3').hide();
+                                    $('.image-alert').append('<div class="col-md-12"><div class="col-md-4"></div><div class="col-md-4"><img style="max-width:50px;" src="{{asset('image/appicon/alert.gif')}}"></div><div class="col-md-4"></div></div>'
+                                            + '<div class="col-md-12"><div class="alert alert-danger">Vous n\'avez pas encore entrer les doublet correctement</div></div>');
+                                } else {
+                                    $('#etatmodal').show();
+                                    $('#etatmodal2').show();
+                                    $('#etatmodal3').show();
+                                    $('#idmatch').val(data.match);
+                                    $('#equipe1').val(data.equipe1.libelle);
+                                    $('#equipe2').val(data.equipe2.libelle);
+                                    $('#doublet1e1').empty();
+                                    $('#doublet1e1').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet1e1').append('<option value="' + data.equipe1.doublet[$i].id + '">' + data.equipe1.doublet[$i].libelle + '</option>')
+                                    }
+                                    $('#doublet2e1').empty();
+                                    $('#doublet2e1').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet2e1').append('<option value="' + data.equipe1.doublet[$i].id + '">' + data.equipe1.doublet[$i].libelle + '</option>')
+                                    }
+                                    $('#doublet3e1').empty();
+                                    $('#doublet3e1').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet3e1').append('<option value="' + data.equipe1.doublet[$i].id + '">' + data.equipe1.doublet[$i].libelle + '</option>')
+                                    }
+                                    $('#doublet1e2').empty();
+                                    $('#doublet1e2').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet1e2').append('<option value="' + data.equipe2.doublet[$i].id + '">' + data.equipe2.doublet[$i].libelle + '</option>')
+                                    }
+                                    $('#doublet2e2').empty();
+                                    $('#doublet2e2').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet2e2').append('<option value="' + data.equipe2.doublet[$i].id + '">' + data.equipe2.doublet[$i].libelle + '</option>')
+                                    }
+                                    $('#doublet3e2').empty();
+                                    $('#doublet3e2').append('<option> </option>');
+                                    for ($i = 0; $i < data.equipe1.doublet.length; $i++) {
+                                        $('#doublet3e2').append('<option value="' + data.equipe2.doublet[$i].id + '">' + data.equipe2.doublet[$i].libelle + '</option>')
+                                    }
+                                }
+
+                            }
+
+                        },
+                        error: function () {
+                        }
+                    })
+                })
+
+                $('#datematch').datetimepicker(function(){
+                })
+                $('#datematch1').datetimepicker(function () {
+
+                });
+                $('#datematch2').datetimepicker(function () {
+
+                });
+                $('#edit_score1').inputmask('9-9');
+                $('#edit_score2').inputmask('9-9');
+                $('#edit_score3').inputmask('9-9');
+            })
+
+        </script>
+
+    {% endblock %}

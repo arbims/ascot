@@ -1,0 +1,32 @@
+gettournoi_info:
+    path: /getinfotournois/{id}
+    defaults: { _controller: "AppAdminBundle:Poule:getinfotournois" }
+    options:
+        expose: true
+match_detailjournee:
+    path: /listjournee
+    defaults: { _controller: "AppAdminBundle:Rencontre:listjournee" }
+    options:
+        expose: true
+
+match_detail:
+    path: /detailmatchjournee
+    defaults: { _controller: "AppAdminBundle:Rencontre:matchdetail" }
+    options:
+        expose: true
+
+match_detail_edit:
+    path: /detailmatchjourneeedit
+    defaults: { _controller: "AppAdminBundle:Rencontre:matchdetailedit" }
+    options:
+        expose: true
+
+adresse_ville:
+    path:  /listville
+    defaults: { _controller: "AppAdminBundle:Adresse:getlistville" }
+    options:
+        expose: true
+
+test_action:
+    path: /test
+    defaults: { _controller: "AppAdminBundle:Rencontre:test" }

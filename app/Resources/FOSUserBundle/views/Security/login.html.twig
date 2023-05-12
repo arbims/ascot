@@ -1,0 +1,46 @@
+{% extends "FOSUserBundle::login.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+{% block title %} login  {%endblock%}
+{% block body %}
+
+
+    {% if error %}
+        <div class="alert alert-danger" style="margin-top: 30px;">
+            <span   href=""  class="close" onclick="$('.alert').slideUp()" >X</span>
+            Login ou mot de passe incorrecte
+
+        </div>
+    {% endif %}
+
+    <div class="account-wall">
+        <section class="align-lg-center">
+            <div class="site-logo"></div>
+            <h1 class="login-title"><span>wel</span>come <small> ASCOT</small></h1>
+        </section>
+        <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+            <input type="hidden" name="_csrf_token"  value="{{ csrf_token }}" />
+            <section>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                    <input type="text" id="username" name="_username" class="form-control" placeholder="Nom d'utlisateur"value="{{ last_username }}" required="required" />
+                </div>
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                    <input type="password" id="password" name="_password" class="form-control" required="required" placeholder="Mot de passe" />
+                </div>
+                <input type="submit" id="_submit" class="btn btn-lg btn-theme-inverse btn-block" name="_submit" value="Se connecter" />
+            </section>
+            <section class="clearfix">
+                <div class="iCheck pull-left"  data-color="red">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label>Se souvenir</label>
+                </div>
+                <a href="#" class="pull-right help">Mot de passe oublié? </a>
+            </section>		
+        </form>
+        <a href="#" class="footer-link">Copyright &copy; 2016-2017; Wazo-Lab</a>
+    </div>	
+    <!-- //account-wall-->
+
+{% endblock body %}

@@ -1,0 +1,36 @@
+rencontre_index:
+    path:     /
+    defaults: { _controller: "AppAdminBundle:Rencontre:index" }
+    methods:  GET
+
+rencontre_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppAdminBundle:Rencontre:show" }
+    methods:  GET
+
+rencontre_new:
+    path:     /new
+    defaults: { _controller: "AppAdminBundle:Rencontre:new" }
+    methods:  [GET, POST]
+
+rencontre_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppAdminBundle:Rencontre:edit" }
+    methods:  [GET, POST]
+
+rencontre_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppAdminBundle:Rencontre:delete" }
+    methods:  DELETE
+
+listpoule_match:
+    path: /{id}/listmatch
+    defaults: { _controller: "AppAdminBundle:Rencontre:listmatch" }
+    
+rencontre_senddata:
+    path: /ajouter/
+    defaults: { _controller: "AppAdminBundle:Rencontre:ajouter" }
+
+
+    
+

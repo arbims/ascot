@@ -1,0 +1,131 @@
+{% extends 'AppAdminBundle::default.html.twig' %}
+{% block title %} Ajouter un joueur {% endblock %}
+
+{% block body %}
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="box box-danger">
+                <div class="panel-body">
+                    <form  method="post" action="{{ path('joueur_new') }}"
+                           enctype="multipart/form-data" class="panel panel-default">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                               
+                                {{form_errors(formpassword)}}
+
+                                <div class="alert-danger">{{ form_errors(formpassword.file) }}</div>
+                                <label>Image 1</label>
+                                {{ form_widget(formpassword.file) }}<!-- rename it -->
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Image 2</label>
+                                {{ form_widget(form.file2) }}<!-- rename it -->
+
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.nomPrenom) }}</div>
+                                <label>Nom Prénom</label>
+                                {{ form_widget(form.nomPrenom, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.tel) }}</div>
+                                <label>Téléphone</label>
+                                {{ form_widget(form.tel, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(formpassword.email) }}</div>
+                                <label>Email</label>
+                                {{ form_widget(formpassword.email, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.sexe) }}</div>
+                                <label>Sexe</label>
+                                {{ form_widget(form.sexe, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.adresse) }}</div>
+                                <label>Adresse</label>
+                                {{ form_widget(form.adresse, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.capitaine) }}</div>
+                                <label>Capitaine ?</label><br>
+                                {{ form_widget(form.capitaine) }}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.membre) }}</div>
+                                <label>Membre</label>
+                                {{ form_widget(form.membre, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.pays) }}</div>
+                                <label>Pays</label>
+                                {{ form_widget(form.pays, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                
+                                <label>Ville</label>
+                                <select id="joueur_ville" name="joueur[ville]" class="form-control"></select>                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.societe) }}</div>
+                                <label>Societé</label>
+                                {{ form_widget(form.societe, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.fonction) }}</div>
+                                <label>Fonction</label>
+                                {{ form_widget(form.fonction, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(form.equipe) }}</div>
+                                <label>Equipe</label>
+                                {{ form_widget(form.equipe, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(formpassword.plainPassword.first) }}</div>
+                                <label>Mot de passe</label>
+                                {{ form_widget(formpassword.plainPassword.first, {'attr': {'class':'form-control'}}) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="alert-danger">{{ form_errors(formpassword.plainPassword.second) }}</div>
+                                <label>Répéter mot de passe</label>
+                                {{ form_widget(formpassword.plainPassword.second, {'attr': {'class':'form-control'}}) }}
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="col-md-12">
+                            {{ form_widget(form._token) }}
+                            <button type="submit" class="btn btn-primary next finish" />
+                            Enregistrer</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}
+{% block javascript %}
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/chosen/chosen.css') }}"/>
+    <script type="text/javascript" src="{{ asset('bundles/chosen/chosen.jquery.min.js') }}"></script>
+
+    <script src= "{{asset('bundles/jsapp/selectville.js')}}" ></script></script>
+{% endblock %}
+
